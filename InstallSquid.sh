@@ -27,5 +27,18 @@ cd squid-3.4.7
 
 make all
 make install
+
 sudo mkdir -p /usr/libexec/
-cp src/ssl/ssl_crtd /usr/libexec/ssl_crtd
+sudo cp src/ssl/ssl_crtd /usr/libexec/ssl_crtd
+sudo /usr/libexec/ssl_crtd -c -s /var/lib/ssl_db
+chown -R proxy. /var/lib/ssl_db
+
+sudo mkdir /etc/squid3/mysql
+sudo chown -R proxy:proxy /etc/squid3/mysql/
+
+sudo mkdir /etc/squid3/ssl_cert
+sudo openssl genrsa 4096 > /etc/squid3/ssl_cert/squid.key
+
+(echo -e "US\nUtah\n\nDevice Ninja\n\n*\admin@device.ninja\n" | openssl req -new -x509 -days 3650 -key /etc/squid3/ssl_cert/squid.key -out /etc/squid3/ssl_cert/squid.pem)
+
+sudo chown -R proxy:proxy /etc/squid3/ssl_cert
