@@ -7,6 +7,7 @@
 
 #! /bin/bash
 apt-get update -y && apt-get upgrade -y
+apt-get source squid3
 apt-get install sudo build-essential dpkg-dev git-core -y
 apt-get build-dep squid3 openssl openssh -y
 
@@ -26,3 +27,5 @@ cd squid-3.4.7
 
 make all
 make install
+sudo mkdir -p /usr/libexec/
+cp src/ssl/ssl_crtd /usr/libexec/ssl_crtd
