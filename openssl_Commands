@@ -1,0 +1,10 @@
+openssl genrsa -out device-ninjaCA.key 4096
+openssl req -x509 -new -key device-ninjaCA.key -out device-ninjaCA.cer -days 730 -subj /CN="Device Ninja CA"
+
+openssl genrsa -out squid.key 4096
+
+openssl req -new -out mycert1.req -key squid.key -subj /CN=device.ninja
+
+openssl x509 -req -in mycert1.req -out squid.cer -CAkey device-ninjaCA.key -CA device-ninjaCA.cer -days 365 -CAcreateserial -CAserial serial
+
+(echo -e "US\nUtah\n\nDevice Ninja\n\ndevice.ninja\nadmin@device.ninja\n" | openssl req -new -x509 -days 365 -key /etc/squid3/ssl_cert/squid.key -out /etc/squid3/ssl_cert/squid.pem)
