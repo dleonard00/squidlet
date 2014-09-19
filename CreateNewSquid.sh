@@ -23,7 +23,7 @@ done
 # Now SSH into the Instance
 gcloud compute --project "mobile-foxy-proxy" ssh --zone "us-central1-b" $1
 
-sleep 2
+
 apt-get update -y && apt-get upgrade -y
 apt-get install sudo build-essential dpkg-dev git-core -y
 apt-get build-dep squid3 openssl openssh -y
@@ -44,6 +44,3 @@ cd squid-3.4.7
 
 make all
 make install
-
-
-# TODO: Make the name of the instance a variable
