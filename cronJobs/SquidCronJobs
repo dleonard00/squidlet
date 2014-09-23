@@ -1,0 +1,7 @@
+# Squid Cron
+# Run: crontab -e
+# Add the lines below to file.
+# TODO: Create a squid or proxy user with a home folder to put this in.
+
+* * * * * /root/cron/updateSquidConfs.sh
+0 0,6,12,18 * * * /root/cron/rotate-uploadtodb-archive.sh

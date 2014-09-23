@@ -49,12 +49,28 @@ chown -R proxy:proxy /var/lib/ssl_db
 sudo mkdir -p /var/log/squid3/mysql/
 sudo chown -R proxy:proxy /var/log/squid3/mysql/
 
-sudo mkdir -p /etc/squid3/ssl_cert/
-sudo openssl genrsa 4096 > /etc/squid3/ssl_cert/DeviceNinja-CA-private.pem
-sudo openssl req -x509 -new -key /etc/squid3/ssl_cert/DeviceNinja-CA-private.pem -out /etc/squid3/ssl_cert/DeviceNinja-CA-pub.pem -days 730 -subj /CN=Device_Ninja_Certificate 
+# Most likely we want to use only one SSL CA CERT - but potentially we dont... 
+# TODO: @dleonard00 Make a decision and either provide cert in github or uncomment what is below.
+# sudo mkdir -p /etc/squid3/ssl_cert/
+# sudo openssl genrsa 4096 > /etc/squid3/ssl_cert/DeviceNinja-CA-private.pem
+# sudo openssl req -x509 -new -key /etc/squid3/ssl_cert/DeviceNinja-CA-private.pem -out /etc/squid3/ssl_cert/DeviceNinja-CA-pub.pem -days 730 -subj /CN=Device_Ninja_Certificate 
 
 #(echo -e "US\nUtah\n\nDevice Ninja\n\ndevice.ninja\nadmin@device.ninja\n" | openssl req -new -x509 -days 365 -key /etc/squid3/ssl_cert/squid.key -out /etc/squid3/ssl_cert/squid.pem)
 
 sudo chown -R proxy:proxy /etc/squid3/ssl_cert
 sudo mkdir -p /var/log/squid3/cache/
 sudo chown -R proxy:proxy /var/log/squid3/
+
+# Add all the conf files and ClientIPWhitelist files
+gsutil -m cp gs://squidward/*.conf /etc/squid3/userACLs/
+gsutil -m cp gs://squidward/*ClientIPWhiteList /etc/squid3/userACLs/userWhiteLists/
+
+# Install the gsutil
+sudo apt-get install gcc python-dev python-setuptools libffi-dev -y
+sudo apt-get install python-pip -y
+sudo pip install gsutil
+
+# then to set up auth run:
+# see https://cloud.google.com/storage/docs/gsutil_install
+# gsutil config
+
