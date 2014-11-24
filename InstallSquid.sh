@@ -1,3 +1,4 @@
+#! /bin/bash
 # create file
 # nano InstallSquid.sh
 # change permissions
@@ -5,17 +6,20 @@
 # run this bash script
 # sudo sh InstallSquid.sh
 
-#! /bin/bash
-
 # Uncomment the lines below if builiding on a local VM.
-#sudo echo 'deb     http://gce_debian_mirror.storage.googleapis.com/ wheezy         main' >> /etc/apt/sources.list
-#sudo echo 'deb-src http://gce_debian_mirror.storage.googleapis.com/ wheezy         main' >> /etc/apt/sources.list
-#sudo echo 'deb     http://http.debian.net/debian wheezy         main' >> /etc/apt/sources.list
-#sudo echo 'deb-src http://http.debian.net/debian wheezy         main' >> /etc/apt/sources.list
+#sudo echo 'deb     http://gce_debian_mirror.storage.googleapis.com/ wheezy main' >> /etc/apt/sources.list
+#sudo echo 'deb-src http://gce_debian_mirror.storage.googleapis.com/ wheezy main' >> /etc/apt/sources.list
+#sudo echo 'deb     http://http.debian.net/debian wheezy main' >> /etc/apt/sources.list
+#sudo echo 'deb-src http://http.debian.net/debian wheezy main' >> /etc/apt/sources.list
+
+# Uncomment if building in a docker container
+#sudo echo 'deb-src http://gce_debian_mirror.storage.googleapis.com/ wheezy main' >> /etc/apt/sources.list
+#sudo echo 'deb-src http://http.debian.net/debian wheezy main' >> /etc/apt/sources.list
+
 
 
 apt-get update -y && apt-get upgrade -y
-apt-get install sudo build-essential dpkg-dev git-core openssl -y
+apt-get install sudo build-essential python-mysqldb dpkg-dev git-core openssl -y
 # apt-get source squid3
 apt-get build-dep squid3 openssl openssh -y
 
@@ -25,10 +29,10 @@ echo 'proxy hard nofile 8192' >> /etc/security/limits.conf
 echo 'proxy soft nofile 8192' >> /etc/security/limits.conf
 
 # Pull down Squid Source
-cd ~
-wget http://www.squid-cache.org/Versions/v3/3.4/squid-3.4.7.tar.gz
-tar -xzvf squid-3.4.7.tar.gz
-cd squid-3.4.7
+
+wget http://www.squid-cache.org/Versions/v3/3.4/squid-3.4.9.tar.gz
+tar -xzvf squid-3.4.9.tar.gz
+cd squid-3.4.9
 
 # Configure - make all - make install
 # you may need to do a make clean
@@ -57,18 +61,20 @@ sudo chown -R proxy:proxy /var/log/squid3/mysql/
 
 #(echo -e "US\nUtah\n\nDevice Ninja\n\ndevice.ninja\nadmin@device.ninja\n" | openssl req -new -x509 -days 365 -key /etc/squid3/ssl_cert/squid.key -out /etc/squid3/ssl_cert/squid.pem)
 
-sudo chown -R proxy:proxy /etc/squid3/ssl_cert
+#sudo chown -R proxy:proxy /etc/squid3/ssl_cert
 sudo mkdir -p /var/log/squid3/cache/
 sudo chown -R proxy:proxy /var/log/squid3/
-
-# Add all the conf files and ClientIPWhitelist files
-gsutil -m cp gs://squidward/*.conf /etc/squid3/userACLs/
-gsutil -m cp gs://squidward/*ClientIPWhiteList /etc/squid3/userACLs/userWhiteLists/
 
 # Install the gsutil
 sudo apt-get install gcc python-dev python-setuptools libffi-dev -y
 sudo apt-get install python-pip -y
 sudo pip install gsutil
+
+# Add all the conf files and ClientIPWhitelist files
+#sudo mkdir -p /etc/squid3/userACLs/
+#sudo mkdir -p /etc/squid3/userACLs/userWhiteLists/
+#gsutil -m cp gs://squidward/*.conf /etc/squid3/userACLs/
+#gsutil -m cp gs://squidward/*ClientIPWhiteList /etc/squid3/userACLs/userWhiteLists/
 
 # then to set up auth run:
 # see https://cloud.google.com/storage/docs/gsutil_install

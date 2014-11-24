@@ -1,0 +1,5 @@
+wget www.apple.com -e use_proxy=yes -e http_proxy=monitor.device.ninja:49151
+
+wget https://www.google.com/ -e use_proxy=yes -e http_proxy=monitor.device.ninja:49151
+
+wget https://www.apple.com/ -e use_proxy=yes -e http_proxy=monitor.device.ninja:49151
