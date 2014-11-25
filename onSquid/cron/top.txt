@@ -1,0 +1,13 @@
+import MySQLdb
+
+myDB = MySQLdb.connect(host="173.194.253.134", user="root", passwd="Develop!1")
+
+c = myDB.cursor()
+c.execute("USE squidly")
+
+print "Executing Query"
+
+c.executemany(
+	"""INSERT INTO ninja_star (proxy_port, squid_req_status, mime, host_req_header, req_url, device_ip, epoch_plus_mili, date_day, date_time, date_subsecond, useragent_header, reply_size, client_fqdn, serverip_or_peername, full_header) 
+	VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)""", 
+	[

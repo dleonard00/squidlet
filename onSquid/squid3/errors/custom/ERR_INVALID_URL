@@ -1,0 +1,102 @@
+
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>ERROR: The requested URL could not be retrieved</title>
+<style type="text/css"><!-- 
+ %l
+
+body
+:lang(fa) { direction: rtl; font-size: 100%; font-family: Tahoma, Roya, sans-serif; float: right; }
+:lang(he) { direction: rtl; }
+ -->
+.host{
+  background:#FFF;
+  width:50px;
+  height:800px;
+  margin: auto;
+  padding-top:40px;
+
+}
+.loading{
+  width:10px;
+  height:10px;
+  background:#FFF;
+  border-radius:100%;
+  float:left;
+  margin-right:5px;
+}
+.loading-0{
+    -webkit-animation:bounce 1s infinite;
+    -webkit-animation-delay:.1s;
+    background:#009DC6
+  
+}
+.loading-1{
+    -webkit-animation:bounce 1s infinite;
+    -webkit-animation-delay:.3s;
+    background:#e8b440;
+}
+.loading-2{
+    -webkit-animation:bounce 1s infinite ease;
+    -webkit-animation-delay:.5s;
+    background:#b62327;
+}
+@-webkit-keyframes bounce {
+  0%, 100% {
+
+    opacity:1;
+  }
+  60% {
+    opacity:.0;
+  }
+}
+
+
+</style>
+</head>
+<script type="text/javascript">
+  function reload(){
+    setInterval(window.location.reload(),500);
+  }
+</script>
+<body id="%c" onload="reload()">
+
+<div class="host">
+  <div class="loading loading-0"></div>
+  <div class="loading loading-1"></div>
+  <div class="loading loading-2"></div>
+</div>
+
+<div id="titles">
+<h1>ERROR</h1>
+<h2>The requested URL could not be retrieved</h2>
+</div>
+<hr>
+
+<div id="content">
+<p>The following error was encountered while trying to retrieve the URL: <a href="%U">%U</a></p>
+
+<blockquote id="error">
+<p><b>Invalid URL</b></p>
+</blockquote>
+
+<p>Some aspect of the requested URL is incorrect.</p>
+
+<p>Some possible problems are:</p>
+<ul>
+<li><p>Missing or incorrect access protocol (should be <q>http://</q> or similar)</p></li>
+<li><p>Missing hostname</p></li>
+<li><p>Illegal double-escape in the URL-Path</p></li>
+<li><p>Illegal character in hostname; underscores are not allowed.</p></li>
+</ul>
+
+<p>Your cache administrator is <a href="mailto:%w%W">%w</a>.</p>
+<br>
+</div>
+
+<hr>
+<div id="footer">
+<p>Generated %T by %h (%s)</p>
+<!-- %c -->
+</div>
+</body></html>

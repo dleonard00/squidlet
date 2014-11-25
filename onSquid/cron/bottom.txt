@@ -1,0 +1,7 @@
+	]
+	)
+
+print "Done Executing Query"
+
+myDB.commit()
+myDB.close()

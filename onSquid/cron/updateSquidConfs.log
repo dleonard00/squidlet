@@ -1,0 +1,18 @@
+Sun Nov 23 23:46:27 MST 2014
+FAILED sudo squid -k parse
+Sun Nov 23 23:47:07 MST 2014
+FAILED sudo squid -k parse
+Sun Nov 23 23:47:20 MST 2014
+FAILED sudo squid -k parse
+Sun Nov 23 23:47:40 MST 2014
+FAILED sudo squid -k parse
+Mon Nov 24 00:02:51 MST 2014
+SUCCESS sudo squid -k parse
+Mon Nov 24 00:03:54 MST 2014
+FAILED sudo squid -k parse
+Mon Nov 24 00:04:31 MST 2014
+SUCCESS sudo squid -k parse
+Mon Nov 24 00:05:55 MST 2014
+SUCCESS sudo squid -k parse
+Mon Nov 24 00:06:42 MST 2014
+SUCCESS sudo squid -k parse
